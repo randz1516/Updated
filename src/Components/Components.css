@@ -1,0 +1,74 @@
+.root{
+    padding: spacing(3, 2);
+    margin: 50px;
+    border: 10px groove #708090;
+}
+.title{
+    border-bottom: 5px solid black;
+    background-color: #708090;
+    
+}
+.title-main{
+    font-family: 'Times New Roman', Times, serif;
+}
+.ChatContent{
+    display: flex;
+    align-items: center;
+}
+.viewchat{
+    width: 100%;
+    height: 450px;
+    background-color: #A8A8A8
+}
+.Server-Room{
+    width: 20%;
+    height: 450px;
+    border-right: 5px groove grey;
+    background-color: #787878;
+}
+.Channel-Room{
+    width: 20%;
+    height: 450px;
+    border-right: 5px groove grey;
+    background-color: #787878;
+}
+.view-channel{
+    width: 20%;
+    height: 450px;
+    border-right: 5px groove grey;
+    background-color: #787878;
+}
+.viewuser{
+    width: 15%;
+    height: 450px;
+    border-left: 5px groove grey;
+    background-color: #2f3136;
+    display: flex;
+}
+.chat-box{
+    border-top: 5px inset rgb(23, 143, 223);
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    background-color: #4f545c;
+    color: aliceblue;
+}
+.btn-send{
+    width: 15%;
+    height: 60px;
+    margin: 5px;
+}
+.chat-field{
+    width: 100%;
+}
+.avatar{
+    flex-direction: column;
+    display: flex;
+}
+.Input{
+    display: flex;
+    margin: 10px
+}
+.msg-txt{
+    padding-left: 10px;
+}
