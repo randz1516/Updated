@@ -6,9 +6,9 @@ import ViewServers from './A.ViewServers'
 import ChatWindow from './ChatWindow'
 import { connect } from 'react-redux';
 import ViewChannels from './B.ViewChannels';
+import ChatBox from './ChatSender'
 class PaperSheet extends Component{
   render(){
-    console.log(this.props)
     return (
       
       <div>
@@ -27,6 +27,7 @@ class PaperSheet extends Component{
               <ChatWindow/>
           </div>
           <div className='Chatcontent'>
+              <ChatBox/>
           </div>
         </Paper>
       </div>
@@ -35,8 +36,6 @@ class PaperSheet extends Component{
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
-
   return {
           Messages: state.msg, 
           Servers: state.newRoom

@@ -10,20 +10,39 @@ import AddServer from './A.AddServer'
 import {DisplayServer, DeleteServer, ViewChannels} from '../Actions';
 
 class ListofServer extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            active: false,
+            setActive: false,
+            id: null
+        }
+    }
     componentDidMount(){
-        console.log("Displaying Servers!!")
         this.props.DisplayServer();
     }
     deleteServer = (id) => {
         this.props.DeleteServer(id);
     }
-    viewchannels = () => {
-        this.props.ViewChannels();
+    // viewchannels = (id) => {
+    //     this.props.ViewChannels(id);
+    //     id.preventDefualt();
+    //     this.setActive(!this.active);       
+    // }
+    pickSever = (id) => {
+        if(this.props.ViewChannels(id) === id){
+            this.setState({
+                color: this.id ? 'green' : null
+            })
+        }
     }
     renderList(){
         return this.props.ViewServers.map((server, i) => {
             return(
-                <ListItem key={i} button onClick={()=>this.viewchannels}>
+                <ListItem key={i} button
+                // className={this.active === false ? null : "color-btn"} 
+                onClick={()=>this.pickSever(server.id[1])
+                }>
                     <ListItemText primary={server.server}/>
                     <IconButton aria-label="delete" className='btn-del' onClick={()=>this.deleteServer(server.id)}>
                         <DeleteIcon fontSize="small" />
@@ -33,8 +52,6 @@ class ListofServer extends Component{
         })
     }
     render(){
-        const data = this.props.ViewServers
-        console.log('******', data)
         return(
             <div className='Server-Room'>
                 <List>

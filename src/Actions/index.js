@@ -3,12 +3,13 @@ import {
     VIEW_SERVERS,
     ADD_CHANNEL,
     VIEW_CHANNELS,
-    ADD_CATEGORY,
-    VIEW_CATEGORIES,
+    // ADD_CATEGORY,
+    // VIEW_CATEGORIES,
     ADD_MESSAGE,
     VIEW_MESSAGES,
-    DELETE_SERVER
-
+    DELETE_SERVER,
+    DELETE_CHANNEL,
+    DELETE_MESSAGE
 } from '../Constants/ActionTypes'
 import ChatFectching from '../API/API'
 
@@ -35,50 +36,63 @@ export const DeleteServer = (id) => async dispatch =>{
     })
 }
 
-
 //Channel Part
-export const AddChannel = (ChannelName) => ({
-    type: ADD_CHANNEL,
-    payload: {
-        Channel: ChannelName
-    }
-})
-export const ViewChannels = () => async dispatch =>{
-    const response = await ChatFectching.get('/channels/');
+export const AddChannel = (id, channel) => async dispatch =>{
+    const response = await ChatFectching.post (`/servers/${id}/channels/`,channel);
     dispatch({
-        type: VIEW_CHANNELS,
+        type: ADD_CHANNEL,
         payload: response.data
     })
 }
+export const ViewChannels = (id) => async dispatch =>{
+    // pick = isClicked =>{
+    //     this.setState({
+    //         color: isClicked ? "green" : "null"
+    //     })
+    // }
 
-//Categories Part
-export const AddCategory = (CategoryName) => ({
-    type: ADD_CATEGORY,
-    payload: {
-        Categorie: CategoryName,
-    }
-})
-export const ViewCategories = (CategoryNames) => ({
-    type: VIEW_CATEGORIES,
-    payload: {
-        Categorie: CategoryNames,
-    }
-})
+    const response = await ChatFectching.get(`/servers/${id}/channels`);
+    dispatch({
+        type: VIEW_CHANNELS,
+        payload: {
+            data: response.data,
+            selectedId: id,
+        }
+    })
+}
+export const DeleteChannel = (id) => async dispatch =>{
+    await ChatFectching.delete(`/servers/${id}/channels/${id}`);
+    dispatch({
+        type: DELETE_CHANNEL,
+        payload: id
+    })
+}
 
 //Message part
-export const AddMessage = (message) => ({
-    type: ADD_MESSAGE,
-    payload: {
-        msg: message
-    }
-})
-export const ViewMessages = (messages) => ({
-    type: VIEW_MESSAGES,
-    payload: {
-        msg: messages
-    }
-})
-
+export const ViewMessages = (id) => async dispatch =>{
+    const response = await ChatFectching.get(`/channels/${id}/messages/`)
+    dispatch({
+        type:VIEW_MESSAGES,
+        payload: {
+            data: response.data,
+            selectedId: id,
+        }
+    })
+}
+export const AddMessage = (id, message) => async dispatch =>{
+    const response = await ChatFectching.post(`/channels/${id}/messages`, message);
+    dispatch({
+        type:ADD_MESSAGE,
+        payload: response.data
+    })
+}
+export const DeleteMessage = (id) => async dispatch => {
+    const response = await ChatFectching.delete(`/channels/${id}messages/${id}`)
+    dispatch({
+        type: DELETE_MESSAGE,
+        payload: response.data
+    })
+}
 //Server Trial  
 // export const NewServer = (ServerName) => ({
 //     type: ADD_SERVER,
@@ -93,3 +107,17 @@ export const ViewMessages = (messages) => ({
 //         })
 //     }
 // }
+
+// //Categories Part
+// export const AddCategory = (CategoryName) => ({
+//     type: ADD_CATEGORY,
+//     payload: {
+//         Categorie: CategoryName,
+//     }
+// })
+// export const ViewCategories = (CategoryNames) => ({
+//     type: VIEW_CATEGORIES,
+//     payload: {
+//         Categorie: CategoryNames,
+//     }
+// })

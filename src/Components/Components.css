@@ -18,19 +18,22 @@
 .viewchat{
     width: 100%;
     height: 450px;
-    background-color: #A8A8A8
+    background-color: #A8A8A8;
+    overflow: auto;
 }
 .Server-Room{
     width: 20%;
     height: 450px;
     border-right: 5px groove grey;
     background-color: #787878;
+    overflow: auto;
 }
 .Channel-Room{
     width: 20%;
     height: 450px;
     border-right: 5px groove grey;
     background-color: #787878;
+    overflow: auto;
 }
 .view-channel{
     width: 20%;
@@ -71,4 +74,12 @@
 }
 .msg-txt{
     padding-left: 10px;
+}
+.green-avatar{
+    margin: 10;
+    color: #fff;
+    background-color: green;
+}
+.color-btn{
+    background-color:#4863A0;
 }

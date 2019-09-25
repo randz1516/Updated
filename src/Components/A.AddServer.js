@@ -7,7 +7,7 @@ class ServerAdding extends Component{
     constructor(props){
         super(props);
         this.state = {
-            server:''
+            server:'',
         };
 
         this.handleChange=this.handleChange.bind(this);
